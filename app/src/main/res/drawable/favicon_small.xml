@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M0,0h108v108h-108z" />
+
+    <!-- Tech Ring -->
+    <path
+        android:strokeColor="#00AABB"
+        android:strokeWidth="2"
+        android:pathData="M54,14 A40,40 0 1,1 53.99,14" />
+
+    <!-- Stylized "5" -->
+    <path
+        android:fillColor="#00AABB"
+        android:pathData="M35,38h15v4h-11v8h7c2,0 4,2 4,4v8c0,2 -2,4 -4,4h-11v-4h11v-8h-11z" />
+
+    <!-- Stylized "g" -->
+    <path
+        android:fillColor="#00AABB"
+        android:pathData="M53,42c0,-2 2,-4 4,-4h8v24c0,2 -2,4 -4,4h-8v-4h8v-8h-4c-2,0 -4,-2 -4,-4v-8zM57,42v8h4v-8h-4z" />
+
+    <!-- Stylized "p" -->
+    <path
+        android:fillColor="#00AABB"
+        android:pathData="M69,38h11c2,0 4,2 4,4v8c0,2 -2,4 -4,4h-7v14h-4zM73,42v8h4v-8h-4z" />
+
+</vector>

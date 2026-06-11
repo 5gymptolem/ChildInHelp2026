@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "176388975867",
+    "firebase_url": "https://childinhelp2026-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "childinhelp2026",
+    "storage_bucket": "childinhelp2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176388975867:android:19617a00b2b71bc0f1d45e",
+        "android_client_info": {
+          "package_name": "com.childInHelp2026.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ6uqHkezylbJgMUridVvf74utVFZ9vbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="sp_primary">#6F58B8</color>
+    <color name="sp_primary_dark">#5D47A7</color>
+    <color name="sp_background">#F4EFFB</color>
+    <color name="sp_bottom_bar">#E9E0F6</color>
+    <color name="sp_surface_floating">#F9F7FC</color>
+    <color name="sp_outline">#C8BEDB</color>
+    <color name="sp_alert">#D62828</color>
+
+    <color name="sp_text_primary">#1F1B24</color>
+    <color name="sp_text_secondary">#5E5A66</color>
+
+    <color name="sp_logo_bg">#26FFFFFF</color>
+    <color name="sp_tab_active">#D9CFF1</color>
+</resources>

@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">childInHelp2026</string>
+
+    <!-- Roles -->
+    <string name="role_admin">admin</string>
+    <string name="role_operator">operator</string>
+    <string name="role_certified">certified</string>
+    <string name="role_user">user</string>
+    <string name="Sos">SOS</string>
+    <string name="Lists">Λίστα</string>
+    <string name="About">Σχετικά με την εφαρμογή</string>
+    <!-- General -->
+    <string name="apotyxia_fortosis">Αποτυχία φόρτωσης ρυθμίσεων</string>
+    <string name="Symban_apo_eidopoihsh">Άνοιξε συμβάν από ειδοποίηση.</string>
+
+
+    <!-- Footer -->
+    <string name="Dev_by">George Kasnakis</string>
+
+    <!-- Status -->
+    <string name="not_connected_user">μη συνδεδεμένος χρήστης</string>
+    <string name="Den_Dothike_Adeia_topothsias">Δεν δόθηκε άδεια τοποθεσίας.</string>
+    <string name="Den_Yparxei_apinidotis">Δεν υπάρχει διαθέσιμος απινιδωτής.</string>
+    <string name="syndedemenos_xristis">Συνδεδεμένος χρήστης</string>
+    <string name="mi_syndedemenos_xristis">Μη συνδεδεμένος χρήστης</string>
+    <string name="Sfalma_fortosis_AED">Σφάλμα φόρτωσης AED: %1$s</string>
+    <string name="aed">Σφάλμα φόρτωσης AED: %1$s</string>
+    <string name="Sfalma_fortosis_sos">Σφάλμα φόρτωσης SOS: %1$s</string>
+    <string name="notification_sos_focused_successfully">Notification SOS focused successfully: %1$s</string>
+    <string name="notification_sos_not_ready_yet">Notification SOS not ready yet: %1$s</string>
+    <string name="notification_intent_received_without_sosid">Notification intent received without sosId.</string>
+    <string name="Fortosi_symvantos_Apo_eidopoihsh">Φόρτωση συμβάντος από ειδοποίηση: %1$s</string>
+    <string name="notification_intent_handled_sosid_latitude_longitude">Notification intent handled. sosId=%1$s, latitude=%2$s, longitude=%3$s</string>
+    <string name="childInHelp2026_safe_mdef">Το childInHelp2026 είναι μια εφαρμογή που δημιουργήθηκε στα πλαίσια του διαγωνισμού ΕΛΛΑΚ 2026\n\n</string>
+    <string name="aed_sos_marker">Τρέχον βήμα: χάρτης AED + ενεργά SOS με marker προβολή.</string>
+    <string name="Menu">Μενού</string>
+    <string name="Syndesi">Σύνδεση</string>
+    <string name="Eggrafi">Εγγραφή</string>
+    <string name="Akyro">Άκυρο</string>
+    <string name="O_logariasmos_mou">Ο λογαριασμός μου</string>
+    <string name="Rolos">Ρόλος: %1$s</string>
+    <string name="Aposyndesi">Αποσύνδεση</string>
+
+    <!-- Health Connect -->
+    <string name="hc_access_granted">Πρόσβαση στο Health Connect δόθηκε!</string>
+    <string name="hc_access_denied">Η πρόσβαση στο Health Connect δεν δόθηκε πλήρως.</string>
+    <string name="hc_not_available">Το Health Connect δεν είναι διαθέσιμο σε αυτή τη συσκευή.</string>
+    <string name="hc_already_granted">Έχετε ήδη δώσει πρόσβαση στο Health Connect.</string>
+    <string name="hc_connected">Health Connect: Συνδεδεμένο</string>
+    <string name="hc_connect">Σύνδεση με Health Connect</string>
+    <string name="hc_disconnect">Αποσύνδεση Health Connect</string>
+    <string name="hc_disconnect_confirm">Θέλετε να διακόψετε τη σύνδεση με το Health Connect; Οι άδειες πρόσβασης θα ανακληθούν.</string>
+    <string name="hc_disconnected">Η σύνδεση με το Health Connect διακόπηκε.</string>
+    <string name="hc_unavailable">Health Connect μη διαθέσιμο</string>
+
+    <!-- Bluetooth -->
+    <string name="bt_biometric_device">Βιομετρική Συσκευή Bluetooth</string>
+    <string name="bt_enable_tracking">Ενεργοποίηση Bluetooth tracking</string>
+    <string name="bt_no_device_selected">Καμία συσκευή επιλεγμένη</string>
+    <string name="bt_scan_devices">Αναζήτηση συσκευών</string>
+    <string name="bt_selected_device">Επιλεγμένη συσκευή: %1$s</string>
+    <string name="bt_scanning">Αναζήτηση...</string>
+
+    <!-- Biometrics -->
+    <string name="heart_rate_label">Καρδιακός παλμός: %1$d bpm</string>
+    <string name="oxygen_label">Οξυγόνο (SpO2): %1$d%%</string>
+    <string name="biometric_stale_time">Τελ. μέτρηση: %1$s</string>
+    <string name="no_biometric_data">Δεν υπάρχουν βιομετρικά δεδομένα</string>
+</resources>

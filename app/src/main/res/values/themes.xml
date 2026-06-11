@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.childInHelp2026" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/sp_primary</item>
+        <item name="colorPrimaryContainer">@color/sp_primary</item>
+        <item name="android:statusBarColor">@color/sp_primary</item>
+        <item name="android:navigationBarColor">@color/sp_bottom_bar</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

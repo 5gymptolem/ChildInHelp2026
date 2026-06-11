@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- PIN BACKGROUND -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M24,2C15.2,2 8,9.2 8,18c0,11 16,28 16,28s16,-17 16,-28C40,9.2 32.8,2 24,2z"/>
+
+    <!-- INNER WHITE CIRCLE -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,10a8,8 0 1,1 0,16a8,8 0 1,1 0,-16"/>
+
+    <!-- HEART SHAPE -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M24,22
+                          C22,20 18,18 18,15
+                          C18,13.3 19.3,12 21,12
+                          C22.1,12 23.1,12.6 24,13.5
+                          C24.9,12.6 25.9,12 27,12
+                          C28.7,12 30,13.3 30,15
+                          C30,18 26,20 24,22z"/>
+
+    <!-- LIGHTNING -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M23,14 L27,14 L25,18 L28,18 L22,26 L24,20 L21,20 Z"/>
+
+</vector>

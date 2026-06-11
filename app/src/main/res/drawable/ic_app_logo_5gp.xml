@@ -1,0 +1,46 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Background (can be used as ic_launcher_background) -->
+    <path
+        android:fillColor="#6F58B8"
+        android:pathData="M0,0h108v108h-108z" />
+
+    <!-- Circular Tech Ring -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:pathData="M54,14 A40,40 0 1,1 53.99,14" />
+
+    <!-- Stylized "5" -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,38h15v4h-11v8h7c2,0 4,2 4,4v8c0,2 -2,4 -4,4h-11v-4h11v-8h-11z" />
+
+    <!-- Stylized "g" -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M53,42c0,-2 2,-4 4,-4h8v24c0,2 -2,4 -4,4h-8v-4h8v-8h-4c-2,0 -4,-2 -4,-4v-8zM57,42v8h4v-8h-4z" />
+
+    <!-- Stylized "p" with Heartbeat tail -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M69,38h11c2,0 4,2 4,4v8c0,2 -2,4 -4,4h-7v14h-4zM73,42v8h4v-8h-4z" />
+
+    <!-- Pulse Line (integrated from p) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M76,68h4l2,-6l3,12l2,-6h4" />
+
+    <!-- App Name Subtitle -->
+    <path
+        android:fillColor="#D9CFF1"
+        android:pathData="M34,80h2v2h-2z M38,80h2v2h-2z M42,80h2v2h-2z M46,80h2v2h-2z M50,80h2v2h-2z M54,80h2v2h-2z M58,80h2v2h-2z M62,80h2v2h-2z M66,80h2v2h-2z M70,80h2v2h-2z M74,80h2v2h-2z" />
+
+</vector>
