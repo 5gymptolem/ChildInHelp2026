@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.childInHelp2026.app'
-    compileSdk 37
+    compileSdk = 37
 
     defaultConfig {
         applicationId "com.childInHelp2026.app"
-        minSdk 26
-        targetSdk 37
+        minSdk = 26
+        targetSdk = 37
         versionCode 1
         versionName "1.0"
 
@@ -36,7 +36,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = "17"
     }
 }
 

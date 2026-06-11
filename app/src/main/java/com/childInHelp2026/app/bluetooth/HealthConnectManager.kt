@@ -54,7 +54,7 @@ class HealthConnectManager(private val context: Context) {
                 ReadRecordsRequest(
                     recordType = HeartRateRecord::class,
                     timeRangeFilter = TimeRangeFilter.between(startTime, endTime),
-                )
+                ),
             )
 
             // Get the very last sample from the last record

@@ -57,14 +57,14 @@ class LoginActivity : AppCompatActivity() {
 
         if (hasError) return
 
-        setLoading(true)
+        setLoading(loading = true)
         binding.textStatus.text = "Γίνεται σύνδεση..."
 
         authRepository.loginUser(
             email = email,
             password = password,
             onSuccess = {
-                setLoading(false)
+                setLoading(loading = false)
                 binding.textStatus.text = "Η σύνδεση ολοκληρώθηκε."
                 Toast.makeText(this, "Επιτυχής σύνδεση", Toast.LENGTH_LONG).show()
 
@@ -73,10 +73,10 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             },
             onError = { errorMessage ->
-                setLoading(false)
+                setLoading(loading = false)
                 binding.textStatus.text = "Σφάλμα: $errorMessage"
                 Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-            }
+            },
         )
     }
 

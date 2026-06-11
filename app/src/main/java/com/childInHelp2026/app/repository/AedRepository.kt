@@ -15,7 +15,7 @@ class AedRepository {
 
     fun observeActiveAeds(
         onData: (List<Aed>) -> Unit,
-        onError: (String) -> Unit
+        onError: (String) -> Unit,
     ): ValueEventListener {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -50,7 +50,7 @@ class AedRepository {
         val latitude = readDouble("latitude") ?: return null
         val longitude = readDouble("longitude") ?: return null
 
-        if (latitude == 0.0 && longitude == 0.0) return null
+        if ((latitude == 0.0) && (longitude == 0.0)) return null
 
         val locationName = readString("locationName")
         val legacyName = readString("name")

@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.google.android.material.button.MaterialButton
 import com.childInHelp2026.app.R
 import com.childInHelp2026.app.data.AppSettings
@@ -37,7 +38,7 @@ class SosUiController(
     private val getCurrentUserRole: () -> String,
     private val getCurrentUserLocation: () -> Location?,
     private val onStatusMessage: (String) -> Unit,
-    private val onNearestAedRequested: (() -> Unit)?
+    private val onNearestAedRequested: (() -> Unit)?,
 ) {
 
     companion object {
@@ -254,12 +255,12 @@ class SosUiController(
 
     private fun updateDialogContent(sos: SosRecord) {
         val creatorDisplay = getCreatorDisplayName(sos).ifBlank { "Άγνωστος" }
-        
-        activeDetailCreatorText?.text = "Δημιουργός: $creatorDisplay"
-        activeDetailPhoneText?.text = "Τηλέφωνο: ${sos.createdByPhone.ifBlank { "-" }}"
+
+        activeDetailCreatorText?.text = context.getString(R.string.creator_label, creatorDisplay)
+        activeDetailPhoneText?.text = context.getString(R.string.phone_label, sos.createdByPhone.ifBlank { "-" })
         activeDetailCoordsText?.text =
-            "Συντεταγμένες: ${String.format(Locale.US, "%.6f, %.6f", sos.latitude, sos.longitude)}"
-        activeDetailMessageText?.text = "Μήνυμα:\n${sos.message.ifBlank { "-" }}"
+            context.getString(R.string.coords_label, String.format(Locale.US, "%.6f, %.6f", sos.latitude, sos.longitude))
+        activeDetailMessageText?.text = context.getString(R.string.message_label, sos.message.ifBlank { "-" })
 
         val latestBiometric = sos.biometricHistory.lastOrNull()
         if (latestBiometric != null) {
@@ -341,12 +342,10 @@ class SosUiController(
             .setView(view)
             .setNegativeButton("Κλείσιμο", null)
 
-        val canDeactivate = canDeactivate(sos)
         val currentUid = getCurrentUserUid()
         val myResponder = if (currentUid.isNullOrBlank()) null else sos.responders[currentUid]
-        val myStatus = myResponder?.status?.trim()?.uppercase(Locale.ROOT)
 
-        when (myStatus) {
+        when (myResponder?.status?.trim()?.uppercase(Locale.ROOT)) {
             RESPONDER_STATUS_RESPONDING -> {
                 builder.setNeutralButton("Έφτασα") { _, _ ->
                     markArrived(sos)
@@ -365,6 +364,7 @@ class SosUiController(
             }
         }
 
+        val canDeactivate = canDeactivate(sos)
         if (canDeactivate) {
             builder.setPositiveButton("Απενεργοποίηση") { _, _ ->
                 confirmDeactivateSos(sos)
@@ -423,7 +423,7 @@ class SosUiController(
                             "Αποτυχία καταχώρησης ανταπόκρισης: $error",
                             Toast.LENGTH_LONG
                         ).show()
-                    }
+                    },
                 )
             }
             .setNegativeButton("Όχι", null)
@@ -462,30 +462,8 @@ class SosUiController(
         )
     }
 
-    private fun cancelResponding(sos: SosRecord) {
-        val responderUid = getCurrentUserUid()
-        if (responderUid.isNullOrBlank()) {
-            Toast.makeText(context, "Δεν υπάρχει συνδεδεμένος χρήστης.", Toast.LENGTH_SHORT)
-                .show()
-            return
-        }
-
-        sosRepository.updateResponderStatus(
-            sosId = sos.id,
-            responderUid = responderUid,
-            newStatus = RESPONDER_STATUS_CANCELLED,
-            onSuccess = {
-                responderTracker.stopTracking()
-                Toast.makeText(context, "Ακύρωσες την ανταπόκριση.", Toast.LENGTH_SHORT).show()
-            },
-            onError = { error ->
-                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
-            }
-        )
-    }
-
     private fun openGoogleNavigation(sos: SosRecord) {
-        val uri = Uri.parse("google.navigation:q=${sos.latitude},${sos.longitude}")
+        val uri = "google.navigation:q=${sos.latitude},${sos.longitude}".toUri()
         val intent = Intent(Intent.ACTION_VIEW, uri).apply {
             setPackage("com.google.android.apps.maps")
         }
@@ -493,9 +471,8 @@ class SosUiController(
         try {
             context.startActivity(intent)
         } catch (_: Exception) {
-            val fallbackUri = Uri.parse(
-                "https://www.google.com/maps/dir/?api=1&destination=${sos.latitude},${sos.longitude}"
-            )
+            val fallbackUri =
+                "https://www.google.com/maps/dir/?api=1&destination=${sos.latitude},${sos.longitude}".toUri()
             val fallbackIntent = Intent(Intent.ACTION_VIEW, fallbackUri)
             context.startActivity(fallbackIntent)
         }
@@ -575,9 +552,9 @@ class SosUiController(
         val myStatus = myResponder?.status?.trim()?.uppercase(Locale.ROOT)
 
         if (
-            myResponder == null ||
-            myStatus == RESPONDER_STATUS_ARRIVED ||
-            myStatus == RESPONDER_STATUS_CANCELLED
+            (myResponder == null) ||
+            (myStatus == RESPONDER_STATUS_ARRIVED) ||
+            (myStatus == RESPONDER_STATUS_CANCELLED)
         ) {
             responderTracker.stopTracking()
         }
@@ -699,11 +676,11 @@ class SosUiController(
         val targetText = sos.type.ifBlank { "SOS" }
 
         return buildString {
-            append("Κατάσταση: $statusText")
+            append(context.getString(R.string.status_label, statusText))
             append("\n")
-            append("Προς: $targetText")
+            append(context.getString(R.string.target_label, targetText))
             append("\n")
-            append("Τελ. ενημέρωση: ${formatTimestamp(responder.lastUpdatedAt)}")
+            append(context.getString(R.string.last_update_label, formatTimestamp(responder.lastUpdatedAt)))
         }
     }
 
@@ -713,7 +690,7 @@ class SosUiController(
 
         val creatorDisplay = getCreatorDisplayName(sos)
         if (creatorDisplay.isNotBlank()) {
-            parts.add("Δημιουργός: $creatorDisplay")
+            parts.add(context.getString(R.string.creator_label, creatorDisplay))
         }
 
         if (sos.message.isNotBlank()) {
@@ -733,7 +710,7 @@ class SosUiController(
 
     private fun formatTimestamp(timestamp: Long): String {
         if (timestamp <= 0L) return "-"
-        val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale("el", "GR"))
+        val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.forLanguageTag("el-GR"))
         return formatter.format(Date(timestamp))
     }
 

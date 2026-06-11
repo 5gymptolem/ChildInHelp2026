@@ -1,7 +1,6 @@
 package com.childInHelp2026.app
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -35,7 +34,7 @@ class ProfileActivity : AppCompatActivity() {
     private val healthConnectManager by lazy { HealthConnectManager(this) }
     private val btPrefs by lazy { BluetoothPreferences(this) }
     private val bluetoothAdapter: BluetoothAdapter? by lazy {
-        val manager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        val manager = getSystemService(BLUETOOTH_SERVICE) as BluetoothManager
         manager.adapter
     }
 

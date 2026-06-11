@@ -83,7 +83,7 @@ class BluetoothBiometricManager(private val context: Context) {
     @SuppressLint("MissingPermission")
     private fun connectToDevice(device: BluetoothDevice) {
         Log.d(TAG, "Connecting to ${device.address}")
-        gatt = device.connectGatt(context, false, gattCallback)
+        gatt = device.connectGatt(context, false, gattCallback, BluetoothDevice.TRANSPORT_LE)
     }
 
     @SuppressLint("MissingPermission")
@@ -159,7 +159,7 @@ class BluetoothBiometricManager(private val context: Context) {
             override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
                 when (characteristic.uuid) {
                     HEART_RATE_CHAR_UUID -> {
-                        val format = if (characteristic.properties and 0x01 != 0) {
+                        val format = if ((characteristic.properties and 0x01) != 0) {
                             BluetoothGattCharacteristic.FORMAT_UINT16
                         } else {
                             BluetoothGattCharacteristic.FORMAT_UINT8

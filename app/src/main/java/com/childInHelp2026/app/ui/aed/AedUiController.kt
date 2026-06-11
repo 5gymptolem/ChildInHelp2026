@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.location.Location
-import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -15,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.google.android.material.button.MaterialButton
 import com.childInHelp2026.app.R
 import com.childInHelp2026.app.data.Aed
@@ -30,7 +30,7 @@ class AedUiController(
     private val context: Context,
     private val mapController: MainMapController,
     private val getCurrentUserLocation: () -> Location?,
-    private val onStatusMessage: (String) -> Unit
+    private val onStatusMessage: (String) -> Unit,
 ) {
 
     private val aedMarkers = mutableListOf<Marker>()
@@ -55,15 +55,14 @@ class AedUiController(
         clearAedOverlays()
 
         val mapView = mapController.getMapView()
-        val defaultMarkerIcon = resolveDrawableByName("ic_aed_marker")
-        val nearestMarkerIcon = resolveDrawableByName("ic_aed_marker_nearest")
-        val clusterer = buildClusterer(mapView)
+        val defaultMarkerIcon = ContextCompat.getDrawable(context, R.drawable.ic_aed_marker)
+        val clusterer = buildClusterer()
         aedClusterer = clusterer
 
         val nearestAed = getNearestAed()
 
         currentAeds.forEach { aed ->
-            val isNearest = nearestAed != null && aed.id == nearestAed.id
+            val isNearest = (nearestAed != null) && (aed.id == nearestAed.id)
 
             val marker = Marker(mapView).apply {
                 position = GeoPoint(aed.latitude, aed.longitude)
@@ -71,13 +70,8 @@ class AedUiController(
                 title = getDisplayTitle(aed)
                 snippet = buildAedSnippet(aed)
 
-                val iconToUse = when {
-                    isNearest && nearestMarkerIcon != null -> nearestMarkerIcon
-                    else -> defaultMarkerIcon
-                }
-
-                if (iconToUse != null) {
-                    icon = iconToUse.constantState?.newDrawable()?.mutate() ?: iconToUse
+                defaultMarkerIcon?.let {
+                    icon = it.constantState?.newDrawable()?.mutate() ?: it
                 }
 
                 relatedObject = if (isNearest) "nearest" else null
@@ -139,19 +133,23 @@ class AedUiController(
                 append(getDisplayTitle(aed))
 
                 if (aed.address.isNotBlank()) {
-                    append("\nΔιεύθυνση: ${aed.address}")
+                    append("\n")
+                    append(context.getString(R.string.aed_address, aed.address))
                 }
 
                 if (aed.contactPhone.isNotBlank()) {
-                    append("\nΤηλέφωνο: ${aed.contactPhone}")
+                    append("\n")
+                    append(context.getString(R.string.aed_phone, aed.contactPhone))
                 }
 
                 if (aed.contactEmail.isNotBlank()) {
-                    append("\nEmail: ${aed.contactEmail}")
+                    append("\n")
+                    append(context.getString(R.string.aed_email, aed.contactEmail))
                 }
 
                 if (distanceText.isNotBlank()) {
-                    append("\nΑπόσταση: $distanceText")
+                    append("\n")
+                    append(context.getString(R.string.aed_distance, distanceText))
                 }
             }
         }.toTypedArray()
@@ -176,12 +174,6 @@ class AedUiController(
 
     fun getNearestAed(): Aed? {
         return getSortedAedsByDistance().firstOrNull()
-    }
-
-    fun openNearestAedNavigation(): Boolean {
-        val nearest = getNearestAed() ?: return false
-        openNavigation(nearest)
-        return true
     }
 
     fun showNearestAedDialog(): Boolean {
@@ -227,21 +219,21 @@ class AedUiController(
         val distanceText = formatDistanceFromUser(aed)
         if (distanceText.isNotBlank()) {
             textDistance.visibility = View.VISIBLE
-            textDistance.text = "Απόσταση: $distanceText"
+            textDistance.text = context.getString(R.string.aed_distance, distanceText)
         } else {
             textDistance.visibility = View.GONE
         }
 
         if (aed.contactPhone.isNotBlank()) {
             textPhone.visibility = View.VISIBLE
-            textPhone.text = "Τηλ: ${aed.contactPhone}"
+            textPhone.text = context.getString(R.string.aed_phone, aed.contactPhone)
         } else {
             textPhone.visibility = View.GONE
         }
 
         if (aed.contactEmail.isNotBlank()) {
             textEmail.visibility = View.VISIBLE
-            textEmail.text = aed.contactEmail
+            textEmail.text = context.getString(R.string.aed_email, aed.contactEmail)
         } else {
             textEmail.visibility = View.GONE
         }
@@ -264,7 +256,7 @@ class AedUiController(
     }
 
     private fun openNavigation(aed: Aed) {
-        val uri = Uri.parse("google.navigation:q=${aed.latitude},${aed.longitude}")
+        val uri = "google.navigation:q=${aed.latitude},${aed.longitude}".toUri()
         val intent = Intent(Intent.ACTION_VIEW, uri).apply {
             setPackage("com.google.android.apps.maps")
         }
@@ -274,7 +266,7 @@ class AedUiController(
         } catch (_: Exception) {
             val fallback = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("geo:${aed.latitude},${aed.longitude}?q=${aed.latitude},${aed.longitude}")
+                "geo:${aed.latitude},${aed.longitude}?q=${aed.latitude},${aed.longitude}".toUri()
             )
             context.startActivity(fallback)
         }
@@ -326,7 +318,7 @@ class AedUiController(
         }
 
         if (aed.contactPhone.isNotBlank()) {
-            parts.add("Τηλ: ${aed.contactPhone}")
+            parts.add(context.getString(R.string.aed_phone, aed.contactPhone))
         }
 
         if (aed.contactEmail.isNotBlank()) {
@@ -399,7 +391,7 @@ class AedUiController(
         }
     }
 
-    private fun buildClusterer(mapView: MapView): RadiusMarkerClusterer {
+    private fun buildClusterer(): RadiusMarkerClusterer {
         return RadiusMarkerClusterer(context).apply {
             setRadius(80)
             setMaxClusteringZoomLevel(17)
@@ -473,10 +465,5 @@ class AedUiController(
 
         aedMarkers.forEach { mapView.overlays.remove(it) }
         aedMarkers.clear()
-    }
-
-    private fun resolveDrawableByName(name: String): Drawable? {
-        val resId = context.resources.getIdentifier(name, "drawable", context.packageName)
-        return if (resId != 0) ContextCompat.getDrawable(context, resId) else null
     }
 }

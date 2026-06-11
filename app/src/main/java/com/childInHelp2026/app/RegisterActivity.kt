@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                 binding.textSettingsInfo.text =
                     "Δεν φορτώθηκαν οι ρυθμίσεις. Θα χρησιμοποιηθεί default ακτίνα ${currentSettings.defaultRadiusKm} km."
                 Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-            }
+            },
         )
     }
 
@@ -110,9 +110,9 @@ class RegisterActivity : AppCompatActivity() {
             hasError = true
         }
 
-        if (hasError || resolvedRadius == null) return
+        if (hasError || (resolvedRadius == null)) return
 
-        setLoading(true)
+        setLoading(loading = true)
         binding.textStatus.text = "Εκκίνηση εγγραφής..."
 
         authRepository.registerUser(
@@ -127,16 +127,16 @@ class RegisterActivity : AppCompatActivity() {
                 binding.textStatus.text = progressMessage
             },
             onSuccess = {
-                setLoading(false)
+                setLoading(loading = false)
                 Toast.makeText(this, "Η εγγραφή ολοκληρώθηκε επιτυχώς.", Toast.LENGTH_LONG).show()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             },
             onError = { errorMessage ->
-                setLoading(false)
+                setLoading(loading = false)
                 binding.textStatus.text = "Σφάλμα: $errorMessage"
                 Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-            }
+            },
         )
     }
 
@@ -150,7 +150,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         val parsed = radiusText.toIntOrNull() ?: return null
-        if (parsed < 1 || parsed > currentSettings.maxRadiusKm) return null
+        if ((parsed < 1) || (parsed > currentSettings.maxRadiusKm)) return null
 
         return parsed
     }

@@ -51,7 +51,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         saveUserToken(
             uid = currentUser.uid,
             email = currentUser.email,
-            token = token
+            token = token,
         )
     }
 
@@ -199,8 +199,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun createNotificationChannelIfNeeded() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
-
         val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val existing = manager.getNotificationChannel(CHANNEL_ID_SOS)
         if (existing != null) return

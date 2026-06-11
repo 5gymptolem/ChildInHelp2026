@@ -10,9 +10,9 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 
 class MainMapController(
-    private val context: Context,
+    context: Context,
     private val mapView: MapView,
-    private val statusView: TextView
+    private val statusView: TextView,
 ) {
 
     companion object {
@@ -40,7 +40,7 @@ class MainMapController(
         statusView.text = "Φόρτωση χάρτη..."
 
         mapView.setOnLongClickListener {
-            val point = mapView.mapCenter as? GeoPoint ?: return@setOnLongClickListener true
+            val point = (mapView.mapCenter as? GeoPoint) ?: return@setOnLongClickListener true
             adminLongPressListener?.invoke(point)
             true
         }
@@ -92,10 +92,6 @@ class MainMapController(
     }
 
     fun getMapView(): MapView = mapView
-
-    fun setStatus(message: String) {
-        statusView.text = message
-    }
 
     fun onResume() {
         mapView.onResume()

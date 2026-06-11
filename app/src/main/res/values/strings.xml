@@ -66,4 +66,17 @@
     <string name="oxygen_label">Οξυγόνο (SpO2): %1$d%%</string>
     <string name="biometric_stale_time">Τελ. μέτρηση: %1$s</string>
     <string name="no_biometric_data">Δεν υπάρχουν βιομετρικά δεδομένα</string>
+
+    <string name="aed_distance">Απόσταση: %1$s</string>
+    <string name="aed_phone">Τηλ: %1$s</string>
+    <string name="aed_email">Email: %1$s</string>
+    <string name="aed_address">Διεύθυνση: %1$s</string>
+
+    <string name="creator_label">Δημιουργός: %1$s</string>
+    <string name="phone_label">Τηλέφωνο: %1$s</string>
+    <string name="coords_label">Συντεταγμένες: %1$s</string>
+    <string name="message_label">Μήνυμα:\n%1$s</string>
+    <string name="status_label">Κατάσταση: %1$s</string>
+    <string name="target_label">Προς: %1$s</string>
+    <string name="last_update_label">Τελ. ενημέρωση: %1$s</string>
 </resources>
